@@ -20,7 +20,7 @@ use Yii;
  *
  * @property string $aliasModel
  */
-abstract class Job extends Model
+abstract class Job extends \yii\db\ActiveRecord
 {
 
         /**
