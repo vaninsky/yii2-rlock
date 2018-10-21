@@ -1,5 +1,5 @@
 {
-    "name": "vaninsky/rlock",
+    "name": "vaninsky/yii2-rlock",
     "description": "Extend models: lockable by redis & translatable",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
