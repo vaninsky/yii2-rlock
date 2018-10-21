@@ -1,11 +1,11 @@
 <?php
 
-namespace vaninsky\modelockable\models;
+namespace vaninsky\rlock\models;
 
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
-use vaninsky\modelockable\models\TranslateDb;
+use vaninsky\rlock\models\TranslateDb;
 use yii\redis\Cache;
 
 trait Translatable

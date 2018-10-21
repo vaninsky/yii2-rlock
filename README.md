@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist vaninsky/yii2-modelockable "*"
+composer require --prefer-dist vaninsky/yii2-rlock "*"
 ```
 
 or add
 
 ```
-"vaninsky/yii2-modelockable": "*"
+"vaninsky/yii2-rlock": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -28,4 +28,4 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \vaninsky\modelockable\AutoloadExample::widget(); ?>```
+<?= \vaninsky\rlock\AutoloadExample::widget(); ?>```

@@ -1,6 +1,6 @@
 <?php
 
-namespace vaninsky\modelockable\models;
+namespace vaninsky\rlock\models;
 
 use Yii;
 use yii\db\ActiveQuery;

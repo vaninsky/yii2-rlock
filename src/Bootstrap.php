@@ -1,6 +1,6 @@
 <?php
 
-namespace vaninsky\modelockable;
+namespace vaninsky\rlock;
 
 use Yii;
 use yii\base\BootstrapInterface;

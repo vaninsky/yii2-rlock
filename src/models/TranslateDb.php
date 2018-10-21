@@ -1,6 +1,6 @@
 <?php
 
-namespace vaninsky\modelockable\models;
+namespace vaninsky\rlock\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "translate".
  */
-class TranslateDb extends \vaninsky\modelockable\models\base\TranslateDb
+class TranslateDb extends \vaninsky\rlock\models\base\TranslateDb
 {
 
     public static $translatable = false;
