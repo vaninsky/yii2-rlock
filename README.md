@@ -1,6 +1,6 @@
 Lockable model rows
 ===================
-Extend models: lockable & translatable
+Extend models: lockable by Redis & translatable
 
 Installation
 ------------
