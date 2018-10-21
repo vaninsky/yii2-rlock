@@ -27,8 +27,8 @@ class Job extends \vaninsky\rlock\models\base\Job
 //     ...
 
     public static $actions = [
-//        self::TYPE_ACTION_1 => 'doActionOne',
-//        self::TYPE_ACTION_1 => 'doActionTwo',
+//        static::TYPE_ACTION_1 => 'doActionOne',
+//        static::TYPE_ACTION_1 => 'doActionTwo',
 //         ...
     ];
 
@@ -62,7 +62,7 @@ class Job extends \vaninsky\rlock\models\base\Job
      */
     public static function getLastTimestamp(int $typeId, $itemId = null)
     {
-        $query = self::find()
+        $query = static::find()
             ->select([new Expression('UNIX_TIMESTAMP(created_at)')])
             ->andWhere(['type_id' => $typeId])
             ->orderBy(['created_at' => SORT_DESC]);
@@ -83,11 +83,11 @@ class Job extends \vaninsky\rlock\models\base\Job
     {
 
         if (!empty($options['item_interval'])) {
-            $last = self::getLastTimestamp($data['type_id'], $data['item_id']);
+            $last = static::getLastTimestamp($data['type_id'], $data['item_id']);
             $interval = intval($options['item_interval']);
         }
         if (!empty($options['interval'])) {
-            $last = self::getLastTimestamp($data['type_id']);
+            $last = static::getLastTimestamp($data['type_id']);
             $interval = intval($options['interval']);
         }
 
@@ -100,8 +100,8 @@ class Job extends \vaninsky\rlock\models\base\Job
             }
         }
         /* @var self $model */
-        $model = new self();
-        $model->status_id = self::STATUS_NEW;
+        $model = new static();
+        $model->status_id = static::STATUS_NEW;
         $model->setAttributes($data);
 
         if (!empty($options['seconds'])) {
@@ -126,16 +126,16 @@ class Job extends \vaninsky\rlock\models\base\Job
     public static function lockAndRun($limit = 1, $params = [])
     {
         $workerId = !empty($params['worker_id']) ? intval($params['worker_id']) : 1;
-        $statusId = !empty($params['status_id']) ? intval($params['status_id']) : self::STATUS_NEW;
+        $statusId = !empty($params['status_id']) ? intval($params['status_id']) : static::STATUS_NEW;
 
-        $query = self::find()
+        $query = static::find()
             ->andWhere(['status_id' => $statusId])
             ->limit($limit);
 
         if (!empty($params['type_id'])) {
             $query->andWhere(['type_id' => $params['type_id']]);
         }
-        self::andNotLocked($query);
+        static::andNotLocked($query);
 
         $cnt = 0;
         /* @var Job $job */
@@ -166,10 +166,10 @@ class Job extends \vaninsky\rlock\models\base\Job
         }
 
         if ($actionResult) {
-            $this->status_id = self::STATUS_OK;
+            $this->status_id = static::STATUS_OK;
         }
         else {
-            $this->status_id = self::STATUS_ERROR;
+            $this->status_id = static::STATUS_ERROR;
         }
         $this->updatedAtNow(['status_id' => $this->status_id]);
         $this->unlock();
