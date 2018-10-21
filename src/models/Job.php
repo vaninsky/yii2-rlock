@@ -21,16 +21,14 @@ class Job extends \vaninsky\rlock\models\base\Job
     const STATUS_OK     = 2;
     const STATUS_ERROR  = 3;
 
-    const TYPE_IMPORT           = 1;
-    const TYPE_EMAIL_ACTIVATE   = 2;
-    const TYPE_SOME_ACTION      = 3;
+    // Sample
+    const TYPE_ACTION_1 = 1;
+    const TYPE_ACTION_2 = 2;
     // ...
 
-
     public static $actions = [
-        self::TYPE_IMPORT           => 'doImport',
-        self::TYPE_EMAIL_ACTIVATE   => 'doEmailActivate',
-        self::TYPE_SOME_ACTION      => 'doSomeAction',
+        self::TYPE_ACTION_1 => 'doActionOne',
+        self::TYPE_ACTION_1 => 'doActionTwo',
         // ...
     ];
 
@@ -159,21 +157,20 @@ class Job extends \vaninsky\rlock\models\base\Job
 //        _log(['start', $this->id], 'job_log'); // Log
         $this->updatedAtNow(['status_id' => $this->status_id]);
 
-        $result = false;
+        $actionResult = false;
         $params = $this->getParams();
 
         if (!empty(self::$actions[$this->type_id])) {
             $action = self::$actions[$this->type_id];
-            $this->$action($params);
+            $actionResult = $this->$action($params);
         }
 
-        if ($result) {
+        if ($actionResult) {
             $this->status_id = self::STATUS_OK;
         }
         else {
             $this->status_id = self::STATUS_ERROR;
         }
-
         $this->updatedAtNow(['status_id' => $this->status_id]);
         $this->unlock();
     }
