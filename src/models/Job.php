@@ -208,6 +208,14 @@ class Job extends \vaninsky\rlock\models\base\Job
         return parent::beforeSave($insert);
     }
 
+    public function updatedAtNow($fields = [])
+    {
+        if (empty($fields['updated_at'])) {
+            $fields['updated_at'] = new Expression('NOW()');
+        }
+
+        static::updateAll($fields, ['id' => $this->id]);
+    }
 
 
 }
