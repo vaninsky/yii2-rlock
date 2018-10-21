@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace vaninsky\rlock\models;
 
 use Yii;
 use yii\base\Exception;
