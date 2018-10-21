@@ -22,14 +22,14 @@ class Job extends \vaninsky\rlock\models\base\Job
     const STATUS_ERROR  = 3;
 
     // Sample
-    const TYPE_ACTION_1 = 1;
-    const TYPE_ACTION_2 = 2;
-    // ...
+//    const TYPE_ACTION_1 = 1;
+//    const TYPE_ACTION_2 = 2;
+//     ...
 
     public static $actions = [
-        self::TYPE_ACTION_1 => 'doActionOne',
-        self::TYPE_ACTION_1 => 'doActionTwo',
-        // ...
+//        self::TYPE_ACTION_1 => 'doActionOne',
+//        self::TYPE_ACTION_1 => 'doActionTwo',
+//         ...
     ];
 
 
@@ -154,15 +154,15 @@ class Job extends \vaninsky\rlock\models\base\Job
      */
     public function do()
     {
-//        _log(['start', $this->id], 'job_log'); // Log
         $this->updatedAtNow(['status_id' => $this->status_id]);
 
         $actionResult = false;
         $params = $this->getParams();
 
-        if (!empty(self::$actions[$this->type_id])) {
-            $action = self::$actions[$this->type_id];
-            $actionResult = $this->$action($params);
+        if (!empty(static::$actions[$this->type_id])) {
+            $action = static::$actions[$this->type_id];
+            /* Do some action with params */
+            $actionResult = static::$action($params);
         }
 
         if ($actionResult) {
